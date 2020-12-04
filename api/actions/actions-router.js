@@ -3,7 +3,6 @@ const express = require('express')
 const { 
    validateActionId,
    validateActionPost,
-   validateProjectPost
 } = require('../../middlewares/middlewares')
 const actionsHelper = require('./actions-model')
 
