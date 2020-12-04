@@ -1,6 +1,6 @@
 // Write your "actions" router here!
 const express = require('express')
-
+const { validateActionId } = require('../../middlewares/middlewares')
 const actionsHelper = require('./actions-model')
 
 const router = express.Router()
@@ -14,8 +14,8 @@ router.get('/', async (req, res) => {
    }
 })
 
-router.get('/:id', async (req, res) => {
-   
+router.get('/:id', validateActionId, (req, res) => {
+   res.status(200).json(req.action)
 })
 
 module.exports = router
