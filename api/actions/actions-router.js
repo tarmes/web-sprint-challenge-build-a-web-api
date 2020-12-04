@@ -2,7 +2,8 @@
 const express = require('express')
 const { 
    validateActionId,
-   validateActionPost
+   validateActionPost,
+   validateProjectPost
 } = require('../../middlewares/middlewares')
 const actionsHelper = require('./actions-model')
 
@@ -27,6 +28,15 @@ router.post('/', validateActionPost, async (req, res) => {
       res.status(201).json(newAction)
    } catch (error) {
       res.status(500).json({ error: "action could not be added"})
+   }
+})
+
+router.put('/:id', validateActionId, validateActionPost, async (req, res) => {
+   try {
+      const updatedAction = await actionsHelper.update(req.params.id, req.body)
+      res.status(200).json(updatedAction)
+   } catch (error) {
+      res.status(500).json({ error: "unable to update the action"})
    }
 })
 
